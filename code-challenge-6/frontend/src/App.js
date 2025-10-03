@@ -38,7 +38,8 @@ function App() {
     priority: 'medium',
     dueDate: ''
   });
-
+  
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchTasks();
   }, []);
