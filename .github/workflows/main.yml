@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd code-challenge-6/frontend
-        npm ci
+        npm install
 
     - name: Build frontend
       run: |
