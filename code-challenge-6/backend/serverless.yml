@@ -1,99 +1,83 @@
-service: serverless-crud-api
+service: my-serverless-app
 
-frameworkVersion: '>=3.0.0 <4.0.0'
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
+  region: ${opt:region, 'us-east-1'}
   stage: ${opt:stage, 'dev'}
-  region: us-east-1
   environment:
-    TASKS_TABLE: ${self:service}-tasks-${self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-items-${self:provider.stage}
   iam:
     role:
       statements:
         - Effect: Allow
           Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
             - dynamodb:Query
             - dynamodb:Scan
-            - dynamodb:GetItem
-            - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: 
-            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TASKS_TABLE}
-            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TASKS_TABLE}/index/*
+          Resource:
+            - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
 
 functions:
-  create:
+  createItem:
     handler: src/handlers/create.handler
     events:
       - http:
-          path: tasks
+          path: items
           method: post
           cors: true
 
-  getAll:
-    handler: src/handlers/getAll.handler
+  getItem:
+    handler: src/handlers/get.handler
     events:
       - http:
-          path: tasks
+          path: items/{id}
           method: get
           cors: true
 
-  getOne:
-    handler: src/handlers/getOne.handler
+  listItems:
+    handler: src/handlers/list.handler
     events:
       - http:
-          path: tasks/{id}
+          path: items
           method: get
           cors: true
 
-  update:
+  updateItem:
     handler: src/handlers/update.handler
     events:
       - http:
-          path: tasks/{id}
+          path: items/{id}
           method: put
           cors: true
 
-  delete:
+  deleteItem:
     handler: src/handlers/delete.handler
     events:
       - http:
-          path: tasks/{id}
+          path: items/{id}
           method: delete
           cors: true
 
 resources:
   Resources:
-    TasksTable:
+    ItemsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:service}-tasks-${self:provider.stage}
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
         AttributeDefinitions:
           - AttributeName: id
-            AttributeType: S
-          - AttributeName: status
             AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: StatusIndex
-            KeySchema:
-              - AttributeName: status
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
-
-plugins:
-  - serverless-offline
-
-custom:
-  serverless-offline:
-    httpPort: 3001
-    noPrependStageInUrl: true
-    lambdaPort: 3002
-    useChildProcesses: true
