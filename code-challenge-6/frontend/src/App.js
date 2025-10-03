@@ -132,23 +132,6 @@ function App() {
     });
   };
 
-  const getPriorityColor = (priority) => {
-    const colors = {
-      low: 'green',
-      medium: 'yellow',
-      high: 'red'
-    };
-    return colors[priority] || 'gray';
-  };
-
-  const getStatusColor = (status) => {
-    const colors = {
-      pending: 'orange',
-      'in-progress': 'blue',
-      completed: 'green'
-    };
-    return colors[status] || 'gray';
-  };
 
   return (
     <Container maxW="container.xl" py={8}>
