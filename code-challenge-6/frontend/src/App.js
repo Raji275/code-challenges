@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Container,
@@ -38,13 +38,8 @@ function App() {
     priority: 'medium',
     dueDate: ''
   });
-  
-// eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     setIsLoading(true);
     try {
       const data = await api.getTasks();
@@ -63,12 +58,16 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [toast]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    
+
     try {
       if (editingTask) {
         console.log('Calling updateTask API');
@@ -133,12 +132,11 @@ function App() {
     });
   };
 
-
   return (
     <Container maxW="container.xl" py={8}>
       <VStack spacing={8}>
         <Heading>Task Management System</Heading>
-        
+
         {isServerError && (
           <Box p={4} bg="red.100" color="red.700" borderRadius="md" w="100%">
             Server connection error. Please refresh the page or try again later.
@@ -152,7 +150,7 @@ function App() {
                 <FormLabel>Title</FormLabel>
                 <Input
                   value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="Enter task title"
                 />
               </FormControl>
@@ -161,7 +159,7 @@ function App() {
                 <FormLabel>Description</FormLabel>
                 <Textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Enter task description"
                 />
               </FormControl>
@@ -171,7 +169,7 @@ function App() {
                   <FormLabel>Status</FormLabel>
                   <Select
                     value={formData.status}
-                    onChange={(e) => setFormData({...formData, status: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                   >
                     <option value="pending">Pending</option>
                     <option value="in-progress">In Progress</option>
@@ -183,7 +181,7 @@ function App() {
                   <FormLabel>Priority</FormLabel>
                   <Select
                     value={formData.priority}
-                    onChange={(e) => setFormData({...formData, priority: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
                   >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -196,7 +194,7 @@ function App() {
                   <Input
                     type="date"
                     value={formData.dueDate}
-                    onChange={(e) => setFormData({...formData, dueDate: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
                   />
                 </FormControl>
               </HStack>
