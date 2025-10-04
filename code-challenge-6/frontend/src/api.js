@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://idb452246a.execute-api.us-east-1.amazonaws.com/prod';
 
 const handleResponse = async (response) => {
   if (response.status === 204) return null;
