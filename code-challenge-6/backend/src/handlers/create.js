@@ -48,8 +48,7 @@ module.exports.handler = async (event) => {
     return {
       statusCode: 201,
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(item)
     };
