@@ -9,7 +9,7 @@ const handleResponse = async (response) => {
 
 export const api = {
   getTasks: async () => {
-    const response = await fetch(`${API_URL}/items`);
+    const response = await fetch(`${API_URL}/tasks`);
     const data = await handleResponse(response);
     return Array.isArray(data) ? data.map(item => ({
       id: item.id,
@@ -27,7 +27,7 @@ export const api = {
     console.log('=== API: CREATE TASK START ===');
     console.log('Task data being sent:', JSON.stringify(task, null, 2));
     
-    const response = await fetch(`${API_URL}/items`, {
+    const response = await fetch(`${API_URL}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const api = {
   },
 
   updateTask: async (id, task) => {
-    const response = await fetch(`${API_URL}/items/${id}`, {
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -64,7 +64,7 @@ export const api = {
   },
 
   deleteTask: async (id) => {
-    const response = await fetch(`${API_URL}/items/${id}`, {
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
       method: 'DELETE'
     });
     return handleResponse(response);
