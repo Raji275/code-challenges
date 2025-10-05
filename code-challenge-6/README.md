@@ -99,3 +99,32 @@ Please feel free to include any of the following to show additional experience:
 5. Unit tests, integration tests, load testing, etc
 
 6. Setup AWS Cognito as part of the backend task and use it for app signup/login. All pages accessible only to authorized users except signup/login
+
+
+## GitHub Actions CI/CD pipeline
+<img width="1875" height="951" alt="Screenshot 2025-10-04 205300" src="https://github.com/user-attachments/assets/520cb624-91ef-4b88-bf6e-0c9833c49ace" />
+
+<img width="1883" height="943" alt="Screenshot 2025-10-04 205447" src="https://github.com/user-attachments/assets/f2c7e7dd-bc93-429b-a822-4dcc862bb0ea" />
+
+<img width="1888" height="929" alt="Screenshot 2025-10-04 205653" src="https://github.com/user-attachments/assets/cfcc9324-ac4c-4915-86dc-b94641ea49d5" />
+
+<img width="1883" height="934" alt="Screenshot 2025-10-04 205717" src="https://github.com/user-attachments/assets/9e0b2805-c388-4869-90a0-b14ab2c70fce" />
+
+
+## AWS CodePipeline
+<img width="1903" height="904" alt="Screenshot 2025-10-04 205949" src="https://github.com/user-attachments/assets/0a30ddca-2897-4228-87b1-a09dee6033de" />
+
+<img width="1910" height="892" alt="Screenshot 2025-10-04 210010" src="https://github.com/user-attachments/assets/5f31c1d4-7834-4c58-96c6-76e1140c9300" />
+
+<img width="1889" height="905" alt="Screenshot 2025-10-04 210052" src="https://github.com/user-attachments/assets/a9ff5712-d5ac-4bc5-86c2-d5ddccdd3815" />
+
+<img width="1895" height="900" alt="Screenshot 2025-10-04 210147" src="https://github.com/user-attachments/assets/e63f1b59-7949-4283-8760-326976adf551" />
+
+<img width="1903" height="905" alt="Screenshot 2025-10-04 210215" src="https://github.com/user-attachments/assets/eefb65cf-ca5d-427d-a248-6cc2d5d7b6de" />
+
+
+## Frontend UI
+<img width="1896" height="937" alt="Screenshot 2025-10-04 210253" src="https://github.com/user-attachments/assets/3c6aa4a6-bffc-4046-af82-5ddc6d4a4712" />
+
+
+
